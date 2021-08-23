@@ -74,8 +74,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const flyAnimate = function() {
             flyInterval = requestAnimationFrame(flyAnimate);
             count++;
-            if (count * 2 < clientWidth / 2 && clientWidth > 768) {
-                popupContent.style.left = count * 2 + 'px';
+            if (count * 35 < clientWidth / 2 && clientWidth > 768) {
+                popupContent.style.left = count * 35 + 'px';
             } else {
                 cancelAnimationFrame(flyInterval);
                 count = 2;
