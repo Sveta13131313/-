@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 timerRemaining = (dateStop - dateNow) / 1000,
                 seconds = Math.floor(timerRemaining % 60),
                 minutes = Math.floor((timerRemaining / 60) % 60),
-                hours = Math.floor(timerRemaining / 60 /60);
+                hours = Math.floor(timerRemaining / 60 / 60);
             return { timerRemaining, hours, minutes, seconds };
         }
 
@@ -37,11 +37,43 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             if (timer.timerRemaining <= 0) {
                 timerHour.textContent = '00';
-            timerMinutes.textContent = '00';
-            timerSeconds.textContent = '00';
+                timerMinutes.textContent = '00';
+                timerSeconds.textContent = '00';
             }
         }
         upDateClock();
     }
     countTimer('24 august 2021');
+    //toggle
+    const toggleMenu = () => {
+        const btnMenu = document.querySelector('.menu'),
+            menu = document.querySelector('menu'),
+            closeBtn = document.querySelector('.close-btn'),
+            menuItems = menu.querySelectorAll('ul>li');
+
+        const handlerMenu = () => {
+            menu.classList.toggle('active-menu');
+        };
+        btnMenu.addEventListener('click', handlerMenu);
+        closeBtn.addEventListener('click', handlerMenu);
+        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+    };
+    toggleMenu();
+
+    //popup
+    const togglePopUp = () => {
+        const popup = document.querySelector('.popup'),
+            popupBtn = document.querySelectorAll('.popup-btn'),
+            popUpClose = document.querySelector('.popup-close');
+
+        popupBtn.forEach((elem) => {
+            elem.addEventListener('click', () => {
+                popup.style.display = 'block';
+            });
+        });
+        popUpClose.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+    };
+    togglePopUp();
 });
