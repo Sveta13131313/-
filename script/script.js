@@ -1,14 +1,14 @@
 window.addEventListener('DOMContentLoaded', () => {
-    'use strict';
+
 
     //timer
     function countTimer(deadline) {
-        let timerHour = document.querySelector('#timer-hours'),
+        const timerHour = document.querySelector('#timer-hours'),
             timerMinutes = document.querySelector('#timer-minutes'),
             timerSeconds = document.querySelector('#timer-seconds');
 
         function getTimerRemaining() {
-            let dateStop = new Date(deadline).getTime(),
+            const dateStop = new Date(deadline).getTime(),
                 dateNow = new Date().getTime(),
                 timerRemaining = (dateStop - dateNow) / 1000,
                 seconds = Math.floor(timerRemaining % 60),
@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         function upDateClock() {
-            let timer = getTimerRemaining();
+            const timer = getTimerRemaining();
             if (timer.hours < 10) {
                 timer.hours = '0' + timer.hours;
             }
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         upDateClock();
     }
-    countTimer('24 august 2021');
+    countTimer('28 august 2021');
     //toggle
     const toggleMenu = () => {
         const btnMenu = document.querySelector('.menu'),
@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
         };
         btnMenu.addEventListener('click', handlerMenu);
         closeBtn.addEventListener('click', handlerMenu);
-        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+        menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
     };
     toggleMenu();
 
@@ -82,7 +82,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
         let animate = false;
-        popupBtn.forEach((elem) => {
+        popupBtn.forEach(elem => {
             elem.addEventListener('click', () => {
                 if (!animate) {
                     popup.style.display = 'block';
@@ -102,4 +102,18 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     togglePopUp();
+
+
+    //Scroll
+    const smoothLinks = document.querySelectorAll('a[href^="#"]');
+    for (const smoothLink of smoothLinks) {
+        smoothLink.addEventListener('click', elem => {
+            elem.preventDefault();
+            const id = smoothLink.getAttribute('href');
+            document.querySelector(id).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    }
 });
