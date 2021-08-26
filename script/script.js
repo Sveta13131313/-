@@ -46,9 +46,9 @@ window.addEventListener('DOMContentLoaded', () => {
     countTimer('28 august 2021');
     //toggle
     const toggleMenu = () => {
-        const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu'),
-            closeBtn = document.querySelector('.close-btn'),
+        const menu = document.querySelector('menu'),
+            //btnMenu = document.querySelector('.menu'),
+            //closeBtn = document.querySelector('.close-btn'),
             menuItems = menu.querySelectorAll('ul>li');
 
         const handlerMenu = () => {
@@ -57,16 +57,15 @@ window.addEventListener('DOMContentLoaded', () => {
         //btnMenu.addEventListener('click', handlerMenu);
         //  closeBtn.addEventListener('click', handlerMenu);
         menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
-        document.body.addEventListener('click', (event) => {
-            let target = event.target;
-            if (target.classList.contains('close-btn')) {
+
+        document.addEventListener('click', (event) => {
+            const target = event.target;
+            if (target.matches('.close-btn')) {
                 handlerMenu();
             }
-            else {
-                target = target.closest('.menu');
-                if (target.classList.contains('menu')) {
-                    handlerMenu();
-                }
+            if (target.closest('.menu')) {
+                handlerMenu();
+
             }
         });
     };
