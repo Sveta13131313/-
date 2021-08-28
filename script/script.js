@@ -1,5 +1,5 @@
-window.addEventListener('DOMContentLoaded', () => {
 
+window.addEventListener('DOMContentLoaded', () => {
 
     //timer
     function countTimer(deadline) {
@@ -49,11 +49,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const toggleMenu = () => {
 
         const menu = document.querySelector('menu');
-          
+
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
         };
-       
+
         document.addEventListener('click', event => {
             const target = event.target;
             if (target.classList.contains('close-btn') ||
@@ -133,7 +133,7 @@ window.addEventListener('DOMContentLoaded', () => {
             tab = document.querySelectorAll('.service-header-tab'),
             tabContent = document.querySelectorAll('.service-tab');
 
-        const toggleTabContent = (index) => {
+        const toggleTabContent = index => {
             for (let i = 0; i < tabContent.length; i++) {
                 if (index === i) {
                     tab[i].classList.add('active');
@@ -144,7 +144,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
         };
-        tabHeader.addEventListener('click', (event) => {
+        tabHeader.addEventListener('click', event => {
             let target = event.target;
             target = target.closest('.service-header-tab');
             if (target.classList.contains('service-header-tab')) {
@@ -163,11 +163,22 @@ window.addEventListener('DOMContentLoaded', () => {
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
-            dot = document.querySelectorAll('.dot'),
-            slider = document.querySelector('.portfolio-content');
+            slider = document.querySelector('.portfolio-content'),
+            ul = document.querySelector('.portfolio-dots');
         let currentSlide = 0,
             interval;
-
+        
+        //добавление точек на слайдер
+        const renderDot = () => {
+            for (let i = 0; i < slide.length; i++) {
+                const li = document.createElement('li');
+                li.classList.add('dot');
+                ul.appendChild(li);
+                console.log(li);
+            }
+        };
+        renderDot();
+        const dot = document.querySelectorAll('.dot');
 
         const prevSlide = (elem, index, strClass) => {
             elem[index].classList.remove(strClass);
@@ -197,10 +208,10 @@ window.addEventListener('DOMContentLoaded', () => {
             clearInterval(interval);
         };
 
-        slider.addEventListener('click', (event) => {
+        slider.addEventListener('click', event => {
             event.preventDefault();
 
-            let target = event.target;
+            const target = event.target;
             if (!target.matches('.portfolio-btn, .dot')) {
                 return;
             }
@@ -231,13 +242,13 @@ window.addEventListener('DOMContentLoaded', () => {
             nextSlide(dot, currentSlide, 'dot-active');
         });
 
-        slider.addEventListener('mouseover', (event) => {
+        slider.addEventListener('mouseover', event => {
             if (event.target.matches('.portfolio-btn') ||
                 event.target.matches('.dot')) {
                 stopSlide();
             }
         });
-        slider.addEventListener('mouseout', (event) => {
+        slider.addEventListener('mouseout', event => {
             if (event.target.matches('.portfolio-btn') ||
                 event.target.matches('.dot')) {
                 startSlide();
