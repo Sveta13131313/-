@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', () => {
             ul = document.querySelector('.portfolio-dots');
         let currentSlide = 0,
             interval;
-        
+
         //добавление точек на слайдер
         const renderDot = () => {
             for (let i = 0; i < slide.length; i++) {
@@ -260,4 +260,83 @@ window.addEventListener('DOMContentLoaded', () => {
 
     slider();
 
+    //смена картинки у команды
+    const imgs = document.querySelectorAll('.command__photo');
+
+    imgs.forEach((elem) => {
+        let src;
+        elem.addEventListener('mouseenter', (e) => {
+            src = event.target.src;
+            event.target.src = event.target.dataset.img;
+        });
+        elem.addEventListener('mouseout', (e) => {
+            event.target.src = src;
+        });
+    });
+
+
+    //проверка ввода цифр в калькуляторе
+
+    const calcSquare = document.querySelector('.calc-square'),
+        calcDay = document.querySelector('.calc-day'),
+        calcCount = document.querySelector('.calc-count');
+
+    calcSquare.addEventListener('blur', () => {
+        calcSquare.value = calcSquare.value.replace(/[\D]/g, '');
+    });
+
+    calcDay.addEventListener('input', () => {
+        calcDay.value = calcDay.value.replace(/[\D]/g, '');
+    });
+    calcCount.addEventListener('input', () => {
+        calcCount.value = calcCount.value.replace(/[\D]/g, '');
+    });
+
+    //проверка ввода в полях Ваше имя
+    const form1Name = document.querySelector('#form1-name'),
+        form2Name = document.querySelector('#form2-name');
+    const checkName = (formName) => {
+        formName.addEventListener('blur', () => {
+            formName.value = formName.value.replace(/[^А-яЁа-яё\s-]/g, '');
+            formName.value = formName.value.replace(/^\s+|\s+$/g, '');
+            formName.value = formName.value.replace(/^\-+|\-+$/g, '');
+            formName.value = formName.value.replace(/^\s+|\s+$/g, '');
+            formName.value = formName.value[0].toUpperCase() + formName.value.slice(1).toLowerCase();
+            formName.value = formName.value.replace(/[ ]+/g, ' ');
+            formName.value = formName.value.replace(/-+/g, '-');
+        });
+    };
+    checkName(form1Name);
+    checkName(form2Name);
+
+
+    //проверка ввода email
+    const form1Email = document.querySelector('#form1-email'),
+        form2Email = document.querySelector('#form2-email');
+
+    const checkEmail = (formEmail) => {
+        formEmail.addEventListener('blur', () => {
+            formEmail.value = formEmail.value.replace(/[^A-Za-z-@_.~*'!]/g, '');
+            formEmail.value = formEmail.value.replace(/-+/g, '-');
+            formEmail.value = formEmail.value.replace(/^\-+|\-+$/g, '');
+        });
+    };
+    checkEmail(form1Email);
+    checkEmail(form2Email);
+
+
+    //проверка ввода телефона
+    const form1Phone = document.querySelector('#form1-phone'),
+        form2Phone = document.querySelector('#form2-phone');
+
+    const checkPhone = (formPhone) => {
+        formPhone.addEventListener('blur', () => {
+            formPhone.value = formPhone.value.replace(/[^0-9()-]/g, '');
+            formPhone.value = formPhone.value.replace(/-+/g, '-');
+            formPhone.value = formPhone.value.replace(/^\-+|\-+$/g, '');
+        });
+    };
+
+    checkPhone(form1Phone);
+    checkPhone(form2Phone);
 });
