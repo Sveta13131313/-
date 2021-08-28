@@ -47,26 +47,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //toggle
     const toggleMenu = () => {
-        const menu = document.querySelector('menu'),
-            //btnMenu = document.querySelector('.menu'),
-            //closeBtn = document.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li');
 
+        const menu = document.querySelector('menu');
+          
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
         };
-        //btnMenu.addEventListener('click', handlerMenu);
-        //  closeBtn.addEventListener('click', handlerMenu);
-        menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
-
-        document.addEventListener('click', (event) => {
+       
+        document.addEventListener('click', event => {
             const target = event.target;
-            if (target.matches('.close-btn')) {
+            if (target.classList.contains('close-btn') ||
+                target.closest('menu>ul>li>a') ||
+                target.closest('.menu') ||
+                (menu.classList.contains('active-menu') && !target.closest('menu'))) {
                 handlerMenu();
-            }
-            if (target.closest('.menu')) {
-                handlerMenu();
-
             }
         });
     };
@@ -105,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        popup.addEventListener('click', (event) => {
+        popup.addEventListener('click', event => {
             let target = event.target;
             if (target.classList.contains('popup-close')) {
                 popup.style.display = 'none';
