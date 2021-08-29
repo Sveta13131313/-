@@ -364,9 +364,8 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             if (typeValue && squareValue) {
                 total = price * typeValue * squareValue * countValue * dayValue;
-            } else {
-                total = 0;
             }
+
             totalValue.textContent = total;
         };
 
@@ -378,6 +377,5 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     calc(100);
-
 
 });
