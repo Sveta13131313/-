@@ -364,15 +364,31 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             if (typeValue && squareValue) {
                 total = price * typeValue * squareValue * countValue * dayValue;
-            }
+            };
+            return total;
+        };
 
-            totalValue.textContent = total;
+        //Анимация счетка подсчёта
+       
+        const outNum = (num) => {
+            let i = 1;
+            let timeout=1,
+                step = Math.round(1000 * timeout / num),
+                int = setInterval(function () {
+                    if (i <= num) {
+                        totalValue.textContent = i;
+                    }
+                    else {
+                        clearInterval(int);
+                    }
+                    i++;
+                }, step);
         };
 
         calcBlock.addEventListener('change', (event) => {
             const target = event.target;
             if (target.matches('select') || target.matches('input')) {
-                countSum();
+                outNum(countSum());
             }
         });
     };
