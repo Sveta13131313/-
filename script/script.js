@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         upDateClock();
     }
-    countTimer('28 august 2021');
+    countTimer('30 august 2021');
 
     //toggle
     const toggleMenu = () => {
@@ -121,10 +121,12 @@ window.addEventListener('DOMContentLoaded', () => {
         smoothLink.addEventListener('click', elem => {
             elem.preventDefault();
             const id = smoothLink.getAttribute('href');
-            document.querySelector(id).scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            if (id !== '#' && id !== '#close') {
+                document.querySelector(id).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            };
         });
     }
 
@@ -174,7 +176,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 const li = document.createElement('li');
                 li.classList.add('dot');
                 ul.appendChild(li);
-                console.log(li);
             }
         };
         renderDot();
@@ -281,20 +282,21 @@ window.addEventListener('DOMContentLoaded', () => {
         calcDay = document.querySelector('.calc-day'),
         calcCount = document.querySelector('.calc-count');
 
-    calcSquare.addEventListener('blur', () => {
-        calcSquare.value = calcSquare.value.replace(/[\D]/g, '');
-    });
+    const checkCalck = (calcInput) => {
+        calcInput.addEventListener('blur', () => {
+            calcInput.value = calcInput.value.replace(/[\D]/g, '');
+        });
+    };
 
-    calcDay.addEventListener('input', () => {
-        calcDay.value = calcDay.value.replace(/[\D]/g, '');
-    });
-    calcCount.addEventListener('input', () => {
-        calcCount.value = calcCount.value.replace(/[\D]/g, '');
-    });
+    checkCalck(calcSquare);
+    checkCalck(calcDay);
+    checkCalck(calcCount);
+
 
     //проверка ввода в полях Ваше имя
     const form1Name = document.querySelector('#form1-name'),
         form2Name = document.querySelector('#form2-name');
+
     const checkName = (formName) => {
         formName.addEventListener('blur', () => {
             formName.value = formName.value.replace(/[^А-яЁа-яё\s-]/g, '');
@@ -306,6 +308,7 @@ window.addEventListener('DOMContentLoaded', () => {
             formName.value = formName.value.replace(/-+/g, '-');
         });
     };
+    
     checkName(form1Name);
     checkName(form2Name);
 
