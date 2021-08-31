@@ -342,6 +342,25 @@ window.addEventListener('DOMContentLoaded', () => {
 
     checkPhone(form1Phone);
     checkPhone(form2Phone);
+
+
+    //Анимация счетка подсчёта
+
+    const time = 400,
+        step = 100;
+    const outNum = (num, totValue) => {
+        let n = 0,
+            t = Math.round(time / (num / step));
+        let interval = setInterval(() => {
+            n += step;
+            if (n === num) {
+                clearInterval(interval);
+            }
+            totValue.textContent = n;
+        }, t);
+
+    };
+
     const calc = (price = 100) => {
         //калькулятор
         const calcBlock = document.querySelector('.calc-block'),
@@ -364,31 +383,39 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             if (typeValue && squareValue) {
                 total = price * typeValue * squareValue * countValue * dayValue;
+                outNum(total, totalValue);
             };
-            return total;
+
         };
 
-        //Анимация счетка подсчёта
-       
-        const outNum = (num) => {
-            let i = 1;
-            let timeout=1,
-                step = Math.round(1000 * timeout / num),
-                int = setInterval(function () {
-                    if (i <= num) {
-                        totalValue.textContent = i;
-                    }
-                    else {
-                        clearInterval(int);
-                    }
-                    i++;
-                }, step);
-        };
+
+
+        // const outNum = (num) => {
+        //     let i = 1;
+        //     let timeout = 1,
+        //         step = Math.round(10 * timeout / num),
+        //         int = setInterval(function () {
+        //             if (i <= num) {
+        //                 totalValue.textContent = i;
+        //             }
+        //             else {
+        //                 clearInterval(int);
+        //             }
+        //             i++;
+        //         }, step);
+        // };
 
         calcBlock.addEventListener('change', (event) => {
             const target = event.target;
-            if (target.matches('select') || target.matches('input')) {
-                outNum(countSum());
+            if (target.matches('select')) {
+                calcSquare.value = '';
+                calcCount.value = '';
+                calcDay.value = '';
+                totalValue.textContent = 0;
+            }
+
+            else if (target.matches('input')) {
+                countSum();
             }
         });
     };
