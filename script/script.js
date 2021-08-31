@@ -275,6 +275,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /*
 
     //проверка ввода цифр в калькуляторе
 
@@ -291,7 +292,6 @@ window.addEventListener('DOMContentLoaded', () => {
     checkCalck(calcSquare);
     checkCalck(calcDay);
     checkCalck(calcCount);
-
 
     //проверка ввода в полях Ваше имя
     const form1Name = document.querySelector('#form1-name'),
@@ -393,5 +393,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     calc(100);
+
+    */
 
 });
