@@ -76,7 +76,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let flyInterval;
         let count = 2;
         const clientWidth = document.documentElement.clientWidth;
-        const flyAnimate = function () {
+        const flyAnimate = function() {
             flyInterval = requestAnimationFrame(flyAnimate);
             count++;
             if (count * 35 < clientWidth / 2 && clientWidth > 768) {
@@ -126,7 +126,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth',
                     block: 'start'
                 });
-            };
+            }
         });
     }
 
@@ -264,13 +264,13 @@ window.addEventListener('DOMContentLoaded', () => {
     //смена картинки у команды
     const imgs = document.querySelectorAll('.command__photo');
 
-    imgs.forEach((elem) => {
+    imgs.forEach(elem => {
         let src;
-        elem.addEventListener('mouseenter', (e) => {
+        elem.addEventListener('mouseenter', e => {
             src = event.target.src;
             event.target.src = event.target.dataset.img;
         });
-        elem.addEventListener('mouseout', (e) => {
+        elem.addEventListener('mouseout', e => {
             event.target.src = src;
         });
     });
@@ -282,7 +282,7 @@ window.addEventListener('DOMContentLoaded', () => {
         calcDay = document.querySelector('.calc-day'),
         calcCount = document.querySelector('.calc-count');
 
-    const checkCalck = (calcInput) => {
+    const checkCalck = calcInput => {
         calcInput.addEventListener('blur', () => {
             calcInput.value = calcInput.value.replace(/[\D]/g, '');
         });
@@ -297,7 +297,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const form1Name = document.querySelector('#form1-name'),
         form2Name = document.querySelector('#form2-name');
 
-    const checkName = (formName) => {
+    const checkName = formName => {
         formName.addEventListener('blur', () => {
             formName.value = formName.value.replace(/[^А-яЁа-яё\s-]/g, '');
             formName.value = formName.value.replace(/^\s+|\s+$/g, '');
@@ -317,7 +317,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const form1Email = document.querySelector('#form1-email'),
         form2Email = document.querySelector('#form2-email');
 
-    const checkEmail = (formEmail) => {
+    const checkEmail = formEmail => {
         formEmail.addEventListener('blur', () => {
             formEmail.value = formEmail.value.replace(/[^A-Za-z-@_.~*'!]/g, '');
             formEmail.value = formEmail.value.replace(/-+/g, '-');
@@ -332,7 +332,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const form1Phone = document.querySelector('#form1-phone'),
         form2Phone = document.querySelector('#form2-phone');
 
-    const checkPhone = (formPhone) => {
+    const checkPhone = formPhone => {
         formPhone.addEventListener('blur', () => {
             formPhone.value = formPhone.value.replace(/[^0-9()-]/g, '');
             formPhone.value = formPhone.value.replace(/-+/g, '-');
@@ -346,12 +346,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //Анимация счетка подсчёта
 
-    const time = 400,
+    const time = 100,
         step = 100;
     const outNum = (num, totValue) => {
         let n = 0,
             t = Math.round(time / (num / step));
-        let interval = setInterval(() => {
+        const interval = setInterval(() => {
             n += step;
             if (n === num) {
                 clearInterval(interval);
@@ -384,7 +384,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (typeValue && squareValue) {
                 total = price * typeValue * squareValue * countValue * dayValue;
                 outNum(total, totalValue);
-            };
+            }
 
         };
 
@@ -405,16 +405,17 @@ window.addEventListener('DOMContentLoaded', () => {
         //         }, step);
         // };
 
-        calcBlock.addEventListener('change', (event) => {
+        calcBlock.addEventListener('change', event => {
             const target = event.target;
-            if (target.matches('select')) {
+          
+            const title = document.querySelector('.calc-option-title'),
+            titleDinamik=calcType.options[calcType.selectedIndex];
+            if (target.matches('select') && titleDinamik === title) {
                 calcSquare.value = '';
                 calcCount.value = '';
                 calcDay.value = '';
                 totalValue.textContent = 0;
-            }
-
-            else if (target.matches('input')) {
+            } else if (target.matches('select') || target.matches('input')) {
                 countSum();
             }
         });
